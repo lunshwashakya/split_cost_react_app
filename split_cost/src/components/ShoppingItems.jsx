@@ -1,5 +1,3 @@
-import shoppingItems from '../data/shoppingItems';
-
 export default function ShoppingItems({ shoppingItems }) {
     return (
         <div id="shopping_items">

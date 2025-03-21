@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function NewForm() {
+export default function NewForm({ items, setItems }) {
 
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
@@ -12,24 +12,28 @@ export default function NewForm() {
 
     function handleAmountChange(event) {
         const value = event.target.value;
-        setAmounts(value);
+        setAmount(parseFloat(value));
     }
 
     function handleAddNew(event) {
         event.preventDefault();
 
-        console.log({ title, amount });
+        setItems([{
+            title,
+            amount,
+            date: new Date(),
+            isSettled: false,
+        }, ...items]);
     }
-
     return (
         <form>
             <div>
                 <label htmlFor="title">Description</label>
-                <input type="text" id="title" name="title" />
+                <input type="text" onChange={handleTitleChange} id="title" name="title" />
             </div>
             <div>
                 <label htmlFor="amount">Amount</label>
-                <input type="text" id="amount" name="amont" />
+                <input type="text" onChange={handleAmountChange} id="amount" name="amont" />
             </div>
             <input type="submit" value="Add New" onClick={handleAddNew} />
         </form>
